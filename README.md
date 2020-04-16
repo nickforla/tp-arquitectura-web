@@ -10,3 +10,13 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
 ### Requerimientos
 
 ## Endpoints
+- Productos
+  - Categories
+  - Stock
+- Pedidos
+- Usuarios
+- Checkout
+- Login
+- Logout
+- Registro
+
