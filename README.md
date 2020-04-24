@@ -10,99 +10,99 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
 ### Requerimientos
 
 ## Endpoints
-- Productos
-  - Obtener Productos
-    - Verbo HTTP: GET
-    - Endpoint: /productos
-    - Parámetros:
-      - limit
-      - offset
-  - Obtener Producto
-    - Verbo HTTP: GET
-    - Endpoint: /productos/{idProducto}
-    - Códigos de Error Posibles:
-      - 400 BAD REQUEST
-      - 404 NOT FOUND
-  - Crear Producto
-    - Verbo HTTP: POST
-    - Endpoint: /productos
-    - Códigos de Error Posibles:
-      - 400 BAD REQUEST
-  - Modificar Producto
-    - Verbo HTTP: PUT
-    - Endpoint: /productos
-    - Códigos de Error Posibles:
-      - 400 BAD REQUEST
-  - Eliminar Producto
-    - Verbo HTTP: DELETE
-    - Endpoint: /productos/{idProducto}
-    - Códigos de Error Posibles:
-      - 400 BAD REQUEST
-      - 404 NOT FOUND
-- Categorías
-  - Obtener Categorías
-    - Verbo HTTP: GET
-    - Endpoint: /categorias
-    - Parámetros:
-      - limit
-      - offset
-  - Obtener Categoría
-    - Verbo HTTP: GET
-    - Endpoint: /categorias/{idCategoria}
-    - Códigos de Error Posibles:
-      - 400 BAD REQUEST
-      - 404 NOT FOUND
-  - Crear Categoría
-    - Verbo HTTP: POST
-    - Endpoint: /categorias
-    - Códigos de Error Posibles:
-      - 400 BAD REQUEST
-  - Modificar Categoría
-    - Verbo HTTP: PUT
-    - Endpoint: /categorias
-    - Códigos de Error Posibles:
-      - 400 BAD REQUEST
-  - Eliminar Categoría
-    - Verbo HTTP: DELETE
-    - Endpoint: /categorias/{idCategorias}
-    - Códigos de Error Posibles:
-      - 400 BAD REQUEST
-      - 404 NOT FOUND
-  - Obtener Productos de una Categoría
-    - Verbo HTTP: GET
-    - Endpoint: /categorias/{idCategoria}/productos
-    - Códigos de Error Posibles:
-      - 400 BAD REQUEST
-      - 404 NOT FOUND
-- Usuarios
-  - Obtener Usuarios
-    - Verbo HTTP: GET
-    - Endpoint: /usuarios
-    - Parámetros:
-      - limit
-      - offset
-  - Obtener Usuario
-    - Verbo HTTP: GET
-    - Endpoint: /usuarios/{idUsuario}
-    - Códigos de Error Posibles:
-      - 400 BAD REQUEST
-      - 404 NOT FOUND
-  - Crear Usuario
-    - Verbo HTTP: POST
-    - Endpoint: /usuarios
-    - Códigos de Error Posibles:
-      - 400 BAD REQUEST
-  - Modificar Usuario
-    - Verbo HTTP: PUT
-    - Endpoint: /usuarios
-    - Códigos de Error Posibles:
-      - 400 BAD REQUEST
-  - Eliminar Usuario
-    - Verbo HTTP: DELETE
-    - Endpoint: /usuarios/{idUsuario}
-    - Códigos de Error Posibles:
-      - 400 BAD REQUEST
-      - 404 NOT FOUND
+- **Productos**
+  - **_Obtener Productos_**
+    - **Verbo HTTP**: GET
+    - **Endpoint**: /productos
+    - **Parámetros**:
+      - _limit_
+      - _offset_
+  - **_Obtener Producto_**
+    - **Verbo HTTP**: GET
+    - **Endpoint**: /productos/{idProducto}
+    - **Códigos de Error Posibles**:
+      - _**400** BAD REQUEST_
+      - _**404** NOT FOUND_
+  - **_Crear Producto_**
+    - **Verbo HTTP**: POST
+    - **Endpoint**: /productos
+    - **Códigos de Error Posibles**:
+      - _**400** BAD REQUEST_
+  - **__Modificar Producto__**
+    - **Verbo HTTP**: PUT
+    - **Endpoint**: /productos
+    - **Códigos de Error Posibles**:
+      - _**400** BAD REQUEST_
+  - **_Eliminar Producto_**
+    - **Verbo HTTP**: DELETE
+    - **Endpoint**: /productos/{idProducto}
+    - **Códigos de Error Posibles**:
+      - _**400** BAD REQUEST_
+      - _**404** NOT FOUND_
+- **Categorías**
+  - **_Obtener Categorías_**
+    - **Verbo HTTP**: GET
+    - **Endpoint**: /categorias
+    - **Parámetros**:
+      - _limit_
+      - _offset_
+  - **_Obtener Categoría_**
+    - **Verbo HTTP**: GET
+    - **Endpoint**: /categorias/{idCategoria}
+    - **Códigos de Error Posibles**:
+      - _**400** BAD REQUEST_
+      - _**404** NOT FOUND_
+  - **_Crear Categoría_**
+    - **Verbo HTTP**: POST
+    - **Endpoint**: /categorias
+    - **Códigos de Error Posibles**:
+      - _**400** BAD REQUEST_
+  - **_Modificar Categoría_**
+    - **Verbo HTTP**: PUT
+    - **Endpoint**: /categorias
+    - **Códigos de Error Posibles**:
+      - _**400** BAD REQUEST_
+  - **_Eliminar Categoría_**
+    - **Verbo HTTP**: DELETE
+    - **Endpoint**: /categorias/{idCategorias}
+    - **Códigos de Error Posibles**:
+      - _**400** BAD REQUEST_
+      - _**404** NOT FOUND_
+  - **_Obtener Productos de una Categoría_**
+    - **Verbo HTTP**: GET
+    - **Endpoint**: /categorias/{idCategoria}/productos
+    - **Códigos de Error Posibles**:
+      - _**400** BAD REQUEST_
+      - _**404** NOT FOUND_
+- **Usuarios**
+  - **_Obtener Usuarios_**
+    - **Verbo HTTP**: GET
+    - **Endpoint**: /usuarios
+    - **Parámetros**:
+      - _limit_
+      - _offset_
+  - **_Obtener Usuario_**
+    - **Verbo HTTP**: GET
+    - **Endpoint**: /usuarios/{idUsuario}
+    - **Códigos de Error Posibles**:
+      - _**400** BAD REQUEST_
+      - _**404** NOT FOUND_
+  - **_Crear Usuario_**
+    - **Verbo HTTP**: POST
+    - **Endpoint**: /usuarios
+    - **Códigos de Error Posibles**:
+      - _**400** BAD REQUEST_
+  - **_Modificar Usuario_**
+    - **Verbo HTTP**: PUT
+    - **Endpoint**: /usuarios
+    - **Códigos de Error Posibles**:
+      - _**400** BAD REQUEST_
+  - **_Eliminar Usuario_**
+    - **Verbo HTTP**: DELETE
+    - **Endpoint**: /usuarios/{idUsuario}
+    - **Códigos de Error Posibles**:
+      - _**400** BAD REQUEST_
+      - _**404** NOT FOUND_
 - Checkout
 - Login
 - Logout
