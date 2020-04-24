@@ -15,8 +15,11 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
     - **Verbo HTTP**: GET
     - **Endpoint**: /productos
     - **Parámetros**:
-      - _limit_
-      - _offset_
+      - _limit_ -> Cantidad de resultados.
+      - _offset_ -> Comenzando desde.
+      - _query_ -> Filtro de búsqueda por nombre del producto.
+      - _precio-desde_ -> Precio mínimo del producto.
+      - _precio-hasta_ -> Precio máximo del producto.
   - **_Obtener Producto_**
     - **Verbo HTTP**: GET
     - **Endpoint**: /productos/{idProducto}
@@ -28,7 +31,7 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
     - **Endpoint**: /productos
     - **Códigos de Error Posibles**:
       - _**400** BAD REQUEST_
-  - **__Modificar Producto__**
+  - **_Modificar Producto_**
     - **Verbo HTTP**: PUT
     - **Endpoint**: /productos
     - **Códigos de Error Posibles**:
@@ -44,8 +47,9 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
     - **Verbo HTTP**: GET
     - **Endpoint**: /categorias
     - **Parámetros**:
-      - _limit_
-      - _offset_
+      - _limit_ -> Cantidad de resultados
+      - _offset_ -> Comenzando desde
+      - _query_ -> Filtro de búsqueda por nombre de la categoría
   - **_Obtener Categoría_**
     - **Verbo HTTP**: GET
     - **Endpoint**: /categorias/{idCategoria}
@@ -79,8 +83,9 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
     - **Verbo HTTP**: GET
     - **Endpoint**: /usuarios
     - **Parámetros**:
-      - _limit_
-      - _offset_
+      - _limit_ -> Cantidad de resultados
+      - _offset_ -> Comenzando desde
+      - _query_ -> Filtro de busqueda por nombre de usuario
   - **_Obtener Usuario_**
     - **Verbo HTTP**: GET
     - **Endpoint**: /usuarios/{idUsuario}
@@ -103,7 +108,37 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
     - **Códigos de Error Posibles**:
       - _**400** BAD REQUEST_
       - _**404** NOT FOUND_
-- Checkout
-- Login
-- Logout
-
+- **Pedidos**
+  - **_Obtener Pedidos_**
+    - **Verbo HTTP**: GET
+    - **Endpoint**: /pedidos
+    - **Parámetros**:
+      - _limit_ -> Cantidad de resultados.
+      - _offset_ -> Comenzando desde.
+      - _query_ -> Filtro de busqueda por nombre de los productos.
+      - _importe-desde_ -> Importe mínimo del pedido.
+      - _importe-hasta_ -> Importe máximo del pedido.
+      - _fecha-desde_ -> Fecha desde la cual se buscan pedidos.
+      - _fecha-hasta_ -> Fecha hasta la cual se buscan pedidos.
+  - **_Obtener Pedido_**
+    - **Verbo HTTP**: GET
+    - **Endpoint**: /pedidos/{idPedido}
+    - **Códigos de Error Posibles**:
+      - _**400** BAD REQUEST_
+      - _**404** NOT FOUND_
+  - **_Crear Pedido_**
+    - **Verbo HTTP**: POST
+    - **Endpoint**: /pedido
+    - **Códigos de Error Posibles**:
+      - _**400** BAD REQUEST_
+  - **_Modificar Pedido_**
+    - **Verbo HTTP**: PUT
+    - **Endpoint**: /pedidos
+    - **Códigos de Error Posibles**:
+      - _**400** BAD REQUEST_
+  - **_Cancelar Pedido_**
+    - **Verbo HTTP**: DELETE
+    - **Endpoint**: /pedidos/{idPedido}
+    - **Códigos de Error Posibles**:
+      - _**400** BAD REQUEST_
+      - _**404** NOT FOUND_
