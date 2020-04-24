@@ -128,7 +128,7 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
       - _**404** NOT FOUND_
   - **_Crear Pedido_**
     - **Verbo HTTP**: POST
-    - **Endpoint**: /pedido
+    - **Endpoint**: /pedidos
     - **Códigos de Error Posibles**:
       - _**400** BAD REQUEST_
   - **_Modificar Pedido_**
