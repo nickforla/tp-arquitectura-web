@@ -83,31 +83,112 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
     - **Verbo HTTP**: GET
     - **Endpoint**: /usuarios
     - **Parámetros**:
-      - _limit_ -> Cantidad de resultados
-      - _offset_ -> Comenzando desde
-      - _query_ -> Filtro de busqueda por nombre de usuario
+
+    | Nombre | Tipo | Descripción | Requerido |
+    | ------ | ---- | ----------- | -- |
+    |_limit_|int|Cantidad de resultados|No|
+    |_offset_|int|Comenzando desde| No |
+    |_query_|string|Filtro de búsqueda por nombre del usuario.| No |
+    - **Codigos de Respuesta**:
+
+    | Código HTTP | Descripción |
+    | ------ | ---- |
+    |200|OK|
+    |500|Internal Server Error|
+
   - **_Obtener Usuario_**
     - **Verbo HTTP**: GET
     - **Endpoint**: /usuarios/{idUsuario}
-    - **Códigos de Error Posibles**:
-      - _**400** BAD REQUEST_
-      - _**404** NOT FOUND_
+    - **Códigos de Respuesta**:
+
+    | Código HTTP | Descripción |
+    | ------ | ---- |
+    |200|OK|
+    |400|Bad Request|
+    |404|Not Found|
+    |500|Internal Server Error|
+
+    - **Response Body(ejemplo)**:
+    ```json
+    {
+      'id': 2,
+      'username': 'user',
+      'email': 'user@test.com',
+      'nombre': 'Juan Test'
+    }
+    ```
+
   - **_Crear Usuario_**
     - **Verbo HTTP**: POST
     - **Endpoint**: /usuarios
-    - **Códigos de Error Posibles**:
-      - _**400** BAD REQUEST_
+    - **Códigos de Respuesta**:
+
+    | Código HTTP | Descripción |
+    | ------ | ---- |
+    |201|Created|
+    |400|Bad Request|
+    |500|Internal Server Error|
+
+    - **Request Body(ejemplo)**:
+    ```json
+    {
+      'username': 'user',
+      'email': 'user@test.com',
+      'nombre': 'Juan Test'
+    }
+    ```
+
+    - **Response Body(ejemplo)**:
+    ```json
+    {
+      'id': 2,
+      'username': 'user',
+      'email': 'user@test.com',
+      'nombre': 'Juan Test'
+    }
+    ```
   - **_Modificar Usuario_**
     - **Verbo HTTP**: PUT
     - **Endpoint**: /usuarios
-    - **Códigos de Error Posibles**:
-      - _**400** BAD REQUEST_
+    - **Códigos de Respuesta**:
+
+    | Código HTTP | Descripción |
+    | ------ | ---- |
+    |200|OK|
+    |400|Bad Request|
+    |500|Internal Server Error|
+
+    - **Request Body(ejemplo)**:
+    ```json
+    {
+      'id': 2
+      'username': 'user',
+      'email': 'user@gmail.com',
+      'nombre': 'Juan Test'
+    }
+    ```
+
+    - **Response Body(ejemplo)**:
+    ```json
+    {
+      'id': 2,
+      'username': 'user',
+      'email': 'user@gmail.com',
+      'nombre': 'Juan Test'
+    }
+    ```
   - **_Eliminar Usuario_**
     - **Verbo HTTP**: DELETE
     - **Endpoint**: /usuarios/{idUsuario}
-    - **Códigos de Error Posibles**:
-      - _**400** BAD REQUEST_
-      - _**404** NOT FOUND_
+    - **Códigos de Respuesta**:
+
+    | Código HTTP | Descripción |
+    | ------ | ---- |
+    |200|OK|
+    |400|Bad Request|
+    |404|Not Found|
+    |500|Internal Server Error|
+    
 - **Pedidos**
   - **_Obtener Pedidos_**
     - **Verbo HTTP**: GET
