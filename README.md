@@ -94,6 +94,7 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
     | Código HTTP | Descripción |
     | ------ | ---- |
     |200|OK|
+    |400|Bad Request|
     |500|Internal Server Error|
 
   - **_Obtener Usuario_**
@@ -237,6 +238,7 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
     | Código HTTP | Descripción |
     | ------ | ---- |
     |200|OK|
+    |400|Bad Request|
     |500|Internal Server Error|
 
   - **_Obtener Pedido_**
@@ -384,7 +386,7 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
     |400|Bad Request|
     |404|Not Found|
     |500|Internal Server Error|
-    
+
     - **Request Body (JSON)**:
     ```yaml
       cantidad:  Int, requerido
