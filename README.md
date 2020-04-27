@@ -360,13 +360,52 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
       'msg': '<Mensaje acorde al problema>'
     }
     ```
+    
+  - **_Eliminar producto de un pedido_**
+    - **Verbo HTTP**: DELETE
+    - **Endpoint**: /pedidos/{idPedido}/productos/{idPedido}
+     - **Códigos de Respuesta**:
 
-  - **_Modificar Pedido_**
-    - **Verbo HTTP**: PUT
-    - **Endpoint**: /pedidos
-    - **Códigos de Error Posibles**:
-      - _**400** BAD REQUEST_
+    | Código HTTP | Descripción |
+    | ------ | ---- |
+    |200|OK|
+    |400|Bad Request|
+    |404|Not Found|
+    |500|Internal Server Error|
 
+  - **_Modificar Cantidad de un Producto_**
+    - **Verbo HTTP**: PATCH
+    - **Endpoint**: /pedidos/{idPedido}/productos/{idProducto}
+    - **Códigos de Respuesta**:
+
+    | Código HTTP | Descripción |
+    | ------ | ---- |
+    |200|OK|
+    |400|Bad Request|
+    |404|Not Found|
+    |500|Internal Server Error|
+    
+    - **Request Body (JSON)**:
+    ```yaml
+      cantidad:  Int, requerido
+    ```
+
+    - **Request Body (ejemplo)**::
+    ```yaml
+      {
+        'cantidad': 3
+      }
+    ```
+
+    - **Códigos de Respuesta**:
+
+    | Código HTTP | Descripción |
+    | ------ | ---- |
+    |200|OK|
+    |400|Bad Request|
+    |404|Not Found|
+    |500|Internal Server Error|
+    
   - **_Modificar Estado Pedido_**
     - **Verbo HTTP**: PATCH
     - **Endpoint**: /pedidos/{idPedido}/estados
@@ -381,7 +420,14 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
 
     - **Request Body (JSON)**:
     ```yaml
-      estado:  String{GENERADO, PREPARADO o ENTREGADO}, requerido
+      estado:  String {1: GENERADO, 2: PREPARADO o 3: ENTREGADO}, requerido
+    ```
+
+    - **Request Body (ejemplo)**::
+    ```yaml
+      {
+        'estado': 3
+      }
     ```
 
   - **_Cancelar Pedido_**
@@ -397,8 +443,8 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
     |500|Internal Server Error|
 - **Estados Posibles de Pedidos**:
 
-  | Estado | Descripción |
-  | ------ | ---- |
-  |GENERADO|El pedido fue generado|
-  |PREPARADO|El pedido fue preparado|
-  |ENTREGADO|El pedido fue entregado|
+  | Id | Estado | Descripción |
+  | ------ | ------ | ---- |
+  |1|GENERADO|El pedido fue generado|
+  |2|PREPARADO|El pedido fue preparado|
+  |3|ENTREGADO|El pedido fue entregado|
