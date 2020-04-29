@@ -15,69 +15,382 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
     - **Verbo HTTP**: GET
     - **Endpoint**: /productos
     - **Parámetros**:
-      - _limit_ -> Cantidad de resultados.
-      - _offset_ -> Comenzando desde.
-      - _query_ -> Filtro de búsqueda por nombre del producto.
-      - _precio-desde_ -> Precio mínimo del producto.
-      - _precio-hasta_ -> Precio máximo del producto.
+
+    | Nombre | Tipo | Descripción | Requerido |
+    | ------ | ---- | ----------- | -- |
+    |_limit_|int|Cantidad de resultados| No |
+    |_offset_|int|Comenzando desde| No |
+    |_query_|string|Filtro de búsqueda por nombre del usuario.| No |
+    | _precio-desde_|float|Precio mínimo del producto.| No |
+    | _precio-desde_|float|Precio máximo del producto.| No |
+
+    - **Codigos de Respuesta**:
+
+    | HTTP Code  | Descripción          |
+    | :--------  | :----------------    |
+    | 200        | OK                   |
+    | 400        | Bad Request          |
+    | 500        | Internal Server Error|
+
+
   - **_Obtener Producto_**
     - **Verbo HTTP**: GET
     - **Endpoint**: /productos/{idProducto}
-    - **Códigos de Error Posibles**:
-      - _**400** BAD REQUEST_
-      - _**404** NOT FOUND_
+    - **Códigos de Respuesta**:
+
+    | HTTP Code  | Descripción          |
+    | :--------  | :----------------    |
+    | 200        | OK                   |
+    | 400        | Bad Request          |
+    | 404        | not Found            |
+    | 500        | Internal Server Error|
+
+    - **Response Body(200)**:
+    ```yaml
+    {
+      'id': 2,
+      'product_code': 'prod123',
+      'nombre': 'Nobre del Producto' ,  
+      'inventory_count': 9999,
+      'brand': 'Marca',
+      'precio': 999.9
+    }
+    ```
+    - **Response Body(400-404-500)**:
+    ```yaml
+    {
+      'msg': '<Mensaje acorde al problema>'
+    }
+    ```
+
   - **_Crear Producto_**
     - **Verbo HTTP**: POST
     - **Endpoint**: /productos
-    - **Códigos de Error Posibles**:
-      - _**400** BAD REQUEST_
+    - **Códigos de Respuesta**:
+
+    | Código HTTP | Descripción          |
+    | :---------  | :--------            |
+    | 201         | Created              |
+    | 400         | Bad Request          |
+    | 500         | Internal Server Error|
+
+     - **Request Body (JSON)**:
+    ```yaml
+      product_code:  String, requerido
+      title:     String, requerido
+      brand:    String, requerido
+    ```
+    - **Request Body(ejemplo)**:
+    ```yaml
+    {
+      'product_code': 'prod123', 
+      'nombre': 'Nombre del Producto',
+      'brand': 'Marca'
+    }
+    ```
+
+    - **Response Body(201)**:
+    ```yaml
+    {
+      'id': 2,
+      'product_code': 'prod123',
+      'nombre': 'Nobre del Producto' ,  
+      'inventory_count': 0,
+      'brand': 'Marca',
+      'precio': 000.0
+    }
+    ```
+
+    - **Response Body(400-500)**:
+    ```yaml
+    {
+      'msg': '<Mensaje acorde al problema>'
+    }
+    ```
+
   - **_Modificar Producto_**
     - **Verbo HTTP**: PUT
     - **Endpoint**: /productos
-    - **Códigos de Error Posibles**:
-      - _**400** BAD REQUEST_
+    - **Códigos de Respuesta**:
+
+    | Código HTTP | Descripción |
+    | ------ | ---- |
+    |200|OK|
+    |400|Bad Request|
+    |404|Not Found|
+    |500|Internal Server Error|
+
+    - **Request Body(ejemplo)**:
+    ```yaml
+    {
+      'id': 2,
+      'product_code': 'prod123',
+      'nombre': 'Nobre del Producto' ,  
+      'inventory_count': 9999,
+      'brand': 'Marca',
+      'precio': 999.9
+    }
+
+    - **Response Body(200)**:
+    ```yaml
+    {
+      'id': 2,
+      'product_code': 'prod123',
+      'nombre': 'Nobre del Producto' ,  
+      'inventory_count': 9999,
+      'brand': 'Marca',
+      'precio': 999.9
+    }
+
+    - **Response Body(400-500)**:
+    ```yaml
+    {
+      'msg': '<Mensaje acorde al problema>'
+    }
+    ```
   - **_Eliminar Producto_**
     - **Verbo HTTP**: DELETE
     - **Endpoint**: /productos/{idProducto}
-    - **Códigos de Error Posibles**:
-      - _**400** BAD REQUEST_
-      - _**404** NOT FOUND_
+    - **Códigos de Respuesta**:
+
+    | Código HTTP | Descripción |
+    | ------ | ---- |
+    |200|OK|
+    |400|Bad Request|
+    |404|Not Found|
+    |500|Internal Server Error|
+      
 - **Categorías**
   - **_Obtener Categorías_**
     - **Verbo HTTP**: GET
     - **Endpoint**: /categorias
     - **Parámetros**:
-      - _limit_ -> Cantidad de resultados
-      - _offset_ -> Comenzando desde
-      - _query_ -> Filtro de búsqueda por nombre de la categoría
+
+    | Nombre | Tipo | Descripción | Requerido |
+    | ------ | ---- | ----------- | -- |
+    |_limit_|int|Cantidad de resultados|No|
+    |_offset_|int|Comenzando desde| No |
+    |_query_|string|Filtro de búsqueda por nombre de la categoría.| No |
+
+    - **Codigos de Respuesta**:
+
+    | Código HTTP | Descripción |
+    | ------ | ---- |
+    |200|OK|
+    |400|Bad Request|
+    |500|Internal Server Error|
+
   - **_Obtener Categoría_**
     - **Verbo HTTP**: GET
-    - **Endpoint**: /categorias/{idCategoria}
-    - **Códigos de Error Posibles**:
-      - _**400** BAD REQUEST_
-      - _**404** NOT FOUND_
+    - **Endpoint**: /categorias/
+    - **Códigos de Respuesta**:
+
+    | Código HTTP | Descripción |
+    | ------ | ---- |
+    |200|OK|
+    |400|Bad Request|
+    |404|Not Found|
+    |500|Internal Server Error|
+
+    - **Response Body(200)**:
+
+    ```yaml
+    {
+      [ "Nombre de la categoria 1", "Nombre de la categoria 2", "Nombre de la categoria 3" ] 
+    }
+    ```
+    - **Response Body(400-404-500)**:
+    ```yaml
+    {
+      'msg': '<Mensaje acorde al problema>'
+    }
+    ```
+
   - **_Crear Categoría_**
     - **Verbo HTTP**: POST
     - **Endpoint**: /categorias
-    - **Códigos de Error Posibles**:
-      - _**400** BAD REQUEST_
+    - **Códigos de Respuesta**:
+
+    | Código HTTP | Descripción |
+    | ------ | ---- |
+    |201|Created|
+    |400|Bad Request|
+    |500|Internal Server Error|
+
+    - **Request Body (JSON)**:
+    ```yaml
+      name: Nombre de la categoria, requerido
+      productos:  Array de Productos, requerido
+    ```
+
+    - **Request Body(ejemplo)**:
+    ```yaml
+    {
+      'id': 2,
+      'name':'Nombre de la categoria',
+      'productos': [
+        {
+          'id': 2,
+          'nombre': 'Pan Integral',
+          'precio': 80.0,
+          'brand': 'Bimbo',
+        },
+        {
+          'id': 3,
+          'nombre': 'Fideos',
+          'precio': 50.0,
+          'brand': 'Matarazzo',
+        },
+        {
+          'id': 4,
+          'nombre': 'Azúcar',
+          'precio': 70.0,
+          'brand': 'Ledesma',
+        }
+      ]
+    }
+
+    ```
+    - **Response Body(201)**:
+    ```yaml
+    {
+      'id': 2,
+      'name':'Nombre de la categoria',
+      'productos': [
+        {
+          'id': 2,
+          'nombre': 'Pan Integral',
+          'precio': 80.0,
+          'brand': 'Bimbo',
+        },
+        {
+          'id': 3,
+          'nombre': 'Fideos',
+          'precio': 50.0,
+          'brand': 'Matarazzo',
+        },
+        {
+          'id': 4,
+          'nombre': 'Azúcar',
+          'precio': 70.0,
+          'brand': 'Ledesma',
+        }
+      ]
+    }
+
+    ```
+    - **Response Body(400-500)**:
+    ```yaml
+    {
+      'msg': '<Mensaje acorde al problema>'
+    }
+    ```
+
   - **_Modificar Categoría_**
-    - **Verbo HTTP**: PUT
-    - **Endpoint**: /categorias
-    - **Códigos de Error Posibles**:
-      - _**400** BAD REQUEST_
+    - **Verbo HTTP**: PATCH
+    - **Endpoint**: /categorias/{idCategoria}
+    - **Códigos de Respuesta**:
+
+    | Código HTTP | Descripción |
+    | ------ | ---- |
+    |200|OK|
+    |400|Bad Request|
+    |404|Not Found|
+    |500|Internal Server Error|
+
+     - **Request Body (JSON)**:
+    ```yaml
+      name: Nombre de la categoria
+      productos:  Array de Productos
+    ```
+
+    - **Request Body(ejemplo)**:
+    ```yaml
+    {
+      'name':'Nombre de la categoria',
+      'productos': [
+        {
+          'id': 2,
+          'nombre': 'Pan Integral',
+          'precio': 80.0,
+          'brand': 'Bimbo',
+        },
+        {
+          'id': 3,
+          'nombre': 'Fideos',
+          'precio': 50.0,
+          'brand': 'Matarazzo',
+        },
+        {
+          'id': 4,
+          'nombre': 'Azúcar',
+          'precio': 70.0,
+          'brand': 'Ledesma',
+        }
+      ]
+    }
+
+    ```
+
   - **_Eliminar Categoría_**
     - **Verbo HTTP**: DELETE
     - **Endpoint**: /categorias/{idCategorias}
-    - **Códigos de Error Posibles**:
-      - _**400** BAD REQUEST_
-      - _**404** NOT FOUND_
+    - **Códigos de Respuesta**:
+
+    | Código HTTP | Descripción |
+    | ------ | ---- |
+    |200|OK|
+    |400|Bad Request|
+    |404|Not Found|
+    |500|Internal Server Error|
+    
   - **_Obtener Productos de una Categoría_**
     - **Verbo HTTP**: GET
     - **Endpoint**: /categorias/{idCategoria}/productos
-    - **Códigos de Error Posibles**:
-      - _**400** BAD REQUEST_
-      - _**404** NOT FOUND_
+    - **Códigos de Respuesta**:
+
+    | Código HTTP | Descripción |
+    | ------ | ---- |
+    |200|OK|
+    |400|Bad Request|
+    |404|Not Found|
+    |500|Internal Server Error|
+    
+    - **Response Body(200)**:
+    ```yaml
+    {
+      'id': 2,
+      'name':'Nombre de la categoria',
+      'productos': [
+        {
+          'id': 2,
+          'nombre': 'Pan Integral',
+          'precio': 80.0,
+          'brand': 'Bimbo',
+        },
+        {
+          'id': 3,
+          'nombre': 'Fideos',
+          'precio': 50.0,
+          'brand': 'Matarazzo',
+        },
+        {
+          'id': 4,
+          'nombre': 'Azúcar',
+          'precio': 70.0,
+          'brand': 'Ledesma',
+        }
+      ]
+    }
+
+    ```
+    - **Response Body(400-404-500)**:
+    ```yaml
+    {
+      'msg': '<Mensaje acorde al problema>'
+    }
+    ```
+
 - **Usuarios**
   - **_Obtener Usuarios_**
     - **Verbo HTTP**: GET
