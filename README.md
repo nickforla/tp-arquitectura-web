@@ -130,7 +130,8 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
       'brand': 'Marca',
       'precio': 999.9
     }
-
+    ```
+    
     - **Response Body(200)**:
     ```yaml
     {
@@ -141,7 +142,7 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
       'brand': 'Marca',
       'precio': 999.9
     }
-
+    ```
     - **Response Body(400-500)**:
     ```yaml
     {
