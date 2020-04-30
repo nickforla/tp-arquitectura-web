@@ -32,6 +32,42 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
     | 400        | Bad Request          |
     | 500        | Internal Server Error|
 
+  - **Response Body(200)**:
+
+    ```yaml
+    [ 
+      {
+        'id': 2,
+        'codigoProducto': 'prod123',
+        'nombre': 'Nombre del Producto' ,  
+        'stock': 9999,
+        'marca': 'Marca',
+        'precio': 999.9,
+        'categoria': {
+          'id': 2,
+          'nombre': 'categoria'
+        }
+      },
+      {
+        'id': 2,
+        'codigoProducto': 'prod123',
+        'nombre': 'Nombre del Producto' ,  
+        'stock': 9999,
+        'marca': 'Marca',
+        'precio': 999.9,
+        'categoria': {
+          'id': 2,
+          'nombre': 'categoria'
+        }
+        }
+    ] 
+    ```
+  - **Response Body(400-500)**:
+    ```yaml
+    {
+      'msg': '<Mensaje acorde al problema>'
+    }
+    ```
 
   - **_Obtener Producto_**
     - **Verbo HTTP**: GET
