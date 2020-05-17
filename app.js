@@ -2,6 +2,8 @@ const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const morgan = require("morgan");
+const productosRouter = require("./routes/productosRoutes");
 
 dotenv.config();
 
@@ -16,6 +18,8 @@ mongoose.connection.on('error', (err) => {
 
 const app = express();
 
+app.use(morgan('dev'));
 app.use(bodyParser.json());
+app.use('/productos', productosRouter);
 
 app.listen(8080);
