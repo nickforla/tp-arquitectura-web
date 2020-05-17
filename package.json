@@ -1,0 +1,24 @@
+{
+  "name": "tp-arquitectura-web",
+  "version": "1.0.0",
+  "description": "Trabajo Práctico para la materia Arquitectura Web - Universidad de Palermo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicoforlano/tp-arquitectura-web.git"
+  },
+  "author": "Hugo Centurión y Nicolás Forlano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicoforlano/tp-arquitectura-web/issues"
+  },
+  "homepage": "https://github.com/nicoforlano/tp-arquitectura-web#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.5.0"
+  }
+}
