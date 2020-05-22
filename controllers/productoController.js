@@ -102,7 +102,6 @@ const eliminarProductoById = (req, res) => {
 
     Producto.deleteOne({_id: req.params.id})
     .then(result => {
-        console.log(result);
         if (result.deletedCount == 1) {
             res.status(200).json({
                 msg: 'Producto eliminado exitosamente!'

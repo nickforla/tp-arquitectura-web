@@ -1,4 +1,5 @@
 const express = require('express');
+const expressValidator = require('express-validator');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -20,6 +21,7 @@ const app = express();
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
+app.use(expressValidator());
 app.use('/productos', productosRouter);
 
 app.listen(8080);
