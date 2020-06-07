@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const morgan = require("morgan");
 const productosRouter = require("./routes/productosRoutes");
+const categoriasRouter = require("./routes/categoriasRoutes");
 
 dotenv.config();
 
@@ -23,5 +24,5 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(expressValidator());
 app.use('/productos', productosRouter);
-
+app.use('/categorias', categoriasRouter);
 app.listen(8080);
