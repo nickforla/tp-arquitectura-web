@@ -10,10 +10,7 @@ function productoValidator(req, res, next) {
     req.check('marca', 'Marca no puede estar vacío').notEmpty();
     //Validación precio
     req.check('precio', 'Precio no puede estar vacío').notEmpty();
-    //Validación categoría
-    req.check('categoria', 'Categoria no puede estar vacío').notEmpty();
-    req.check('categoria.id', 'Categoria ID no puede estar vacío').notEmpty();
-    req.check('categoria.nombre', 'Nombre Categoria no puede estar vacío').notEmpty();
+    
 
     const errors = req.validationErrors();
     if(errors) {
@@ -26,7 +23,10 @@ function productoValidator(req, res, next) {
 
 function categoriaValidator(req, res, next) {
     
-    //Validaciones
+    //Validación categoría
+
+    req.check('categoria.id', 'Categoria ID no puede estar vacío').notEmpty();
+    req.check('categoria.nombre', 'Nombre Categoria no puede estar vacío').notEmpty();
     
     //Resultado
     const errors = req.validationErrors();
@@ -37,5 +37,6 @@ function categoriaValidator(req, res, next) {
 }
 
 module.exports = {
-    productoValidator
+    productoValidator,
+    categoriaValidator
 }
