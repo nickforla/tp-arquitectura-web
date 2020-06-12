@@ -25,15 +25,16 @@ function categoriaValidator(req, res, next) {
     
     //Validación categoría
 
-    req.check('categoria.id', 'Categoria ID no puede estar vacío').notEmpty();
-    req.check('categoria.nombre', 'Nombre Categoria no puede estar vacío').notEmpty();
+    req.check('nombre', 'Nombre Categoria no puede estar vacío').notEmpty();
     
     //Resultado
     const errors = req.validationErrors();
     if(errors) {
         const firstError = errors.map((err) => err.msg)[0];
         return res.status(400).json({msg: firstError});
-    }   
+    }
+    
+    next();
 }
 
 module.exports = {

@@ -5,8 +5,8 @@ const Categoria = require('../models/categoria');
 */
 const getCategorias = (req, res) => {
     Categoria.find()
-    .then((Categorias) => {
-        res.status(200).json(Categorias);
+    .then((categorias) => {
+        res.status(200).json(categorias);
     })
     .catch((err) => {
         res.status(500).json({
@@ -16,18 +16,18 @@ const getCategorias = (req, res) => {
 }
 
 /**
- * Busca un Categoria por id y lo retorna si es hallado, caso contrario retorna un 404.
+ * Busca una Categoria por id y lo retorna si es hallado, caso contrario retorna un 404.
 */
 const getCategoriaById = (req, res) => {
     console.log(req.params);
 
-    Categoria.findById(req.params.id, (error, Categoria) => {
+    Categoria.findById(req.params.id, (error, categoria) => {
         if (error) {
             res.status(500).json({error});
         }
 
-        if (Categoria) {
-            res.status(200).json(Categoria);
+        if (categoria) {
+            res.status(200).json(categoria);
         } else {
             res.status(404).json({
                 msg: `La Categoria con el id indicado(${req.params.id}) no fue encontrada`
@@ -45,10 +45,7 @@ const crearCategoria = (req, res) => {
 
     nuevaCategoria.save()
     .then(resultado => {
-        
         console.log(resultado);
-        delete resultado.__v;
-
         res.status(201).json(resultado);
     })
     .catch(error => {
@@ -67,8 +64,6 @@ const modificarCategoria = (req, res) => {
 
     const CategoriaAModificar = req.body;
 
-    // console.log(req);
-
     Categoria.updateOne({_id: CategoriaAModificar._id}, CategoriaAModificar)
     .then(resultado => {
         
@@ -77,9 +72,6 @@ const modificarCategoria = (req, res) => {
                 msg: `La Categoria con el id indicado(${CategoriaAModificar._id}) no fue encontrada.`
             });
         } else {
-            console.log(resultado);
-            delete resultado.__v;
-
             res.status(200).json({
                 msg: 'Categoria modificada exitosamente!'
             });

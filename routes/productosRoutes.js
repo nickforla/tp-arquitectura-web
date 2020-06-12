@@ -2,12 +2,12 @@ const express = require('express');
 const productosController = require('../controllers/productoController');
 const {productoValidator} = require('../validation/validator');
 
-const router = express.Router();
+const productosRouter = express.Router();
 
-router.get('/', productosController.getProductos);
-router.post('/', productoValidator, productosController.crearProducto);
-router.put('/', productoValidator, productosController.modificarProducto);
-router.get('/:id', productosController.getProductoById);
-router.delete('/:id', productosController.eliminarProductoById);
+productosRouter.get('/', productosController.getProductos);
+productosRouter.post('/', productoValidator, productosController.crearProducto);
+productosRouter.put('/', productoValidator, productosController.modificarProducto);
+productosRouter.get('/:id', productosController.getProductoById);
+productosRouter.delete('/:id', productosController.eliminarProductoById);
 
-module.exports = router;
+module.exports = productosRouter;

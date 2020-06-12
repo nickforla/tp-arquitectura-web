@@ -2,12 +2,12 @@ const express = require('express');
 const categoriasController = require('../controllers/categoriaController');
 const {categoriaValidator} = require('../validation/validator');
 
-const router = express.Router();
+const categoriasRouter = express.Router();
 
-router.get('/', categoriasController.getCategorias);
-router.post('/', categoriaValidator, categoriasController.crearCategoria);
-router.put('/', categoriaValidator, categoriasController.modificarCategoria);
-router.get('/:id', categoriasController.getCategoriaById);
-router.delete('/:id', categoriasController.eliminarCategoriaById);
+categoriasRouter.get('/', categoriasController.getCategorias);
+categoriasRouter.post('/', categoriaValidator, categoriasController.crearCategoria);
+categoriasRouter.put('/', categoriaValidator, categoriasController.modificarCategoria);
+categoriasRouter.get('/:id', categoriasController.getCategoriaById);
+categoriasRouter.delete('/:id', categoriasController.eliminarCategoriaById);
 
-module.exports = router;
+module.exports = categoriasRouter;
