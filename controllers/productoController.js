@@ -1,4 +1,5 @@
 const Producto = require('../models/producto');
+const Categoria = require('../models/categoria');
 
 /**
  * Retorna una lista de productos en base a los parámetros de búsqueda.
@@ -45,8 +46,6 @@ const crearProducto = (req, res) => {
 
     nuevoProducto.save()
     .then(resultado => {
-        
-        console.log(resultado);
         delete resultado.__v;
 
         res.status(201).json(resultado);
@@ -66,8 +65,6 @@ const crearProducto = (req, res) => {
 const modificarProducto = (req, res) => {
 
     const productoAModificar = req.body;
-
-    // console.log(req);
 
     Producto.updateOne({_id: productoAModificar._id}, productoAModificar)
     .then(resultado => {
@@ -98,8 +95,6 @@ const modificarProducto = (req, res) => {
 */
 const eliminarProductoById = (req, res) => {
 
-    // console.log(req);
-
     Producto.deleteOne({_id: req.params.id})
     .then(result => {
         if (result.deletedCount == 1) {
@@ -119,10 +114,36 @@ const eliminarProductoById = (req, res) => {
     });
 }
 
+/**
+ * Obtiene todos los productos asociados a una categoria
+*/
+const getProductosByCategoriaId = (req, res) => {
+    
+    const categoriaId = req.params.id;
+
+    Categoria.findById(categoriaId)
+    .then(catResult => {
+        if(catResult) {
+            Producto.find({'categoria.id': categoriaId})
+            .then(prodResult => {
+                res.status(200).json(prodResult);
+            }).catch(err => {
+                res.status(500).json({msg: 'Ha ocurrido un error...'});
+            });
+        } else {
+            res.status(404).json({msg: 'La categoría indicada no fue hallada...'});
+        }
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({msg: 'Ha ocurrido un error'});
+    });
+}
+
 module.exports = {
     getProductos,
     getProductoById,
     crearProducto,
     modificarProducto,
-    eliminarProductoById
+    eliminarProductoById,
+    getProductosByCategoriaId
 }

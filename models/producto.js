@@ -22,6 +22,10 @@ const productoSchema = new Schema({
         required: true
     },
     categoria: {
+        id: {
+            type: String,
+            required: true
+        },
         nombre: {
             type: String,
             required: true

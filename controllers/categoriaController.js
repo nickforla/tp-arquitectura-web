@@ -19,11 +19,10 @@ const getCategorias = (req, res) => {
  * Busca una Categoria por id y lo retorna si es hallado, caso contrario retorna un 404.
 */
 const getCategoriaById = (req, res) => {
-    console.log(req.params);
 
     Categoria.findById(req.params.id, (error, categoria) => {
         if (error) {
-            res.status(500).json({error});
+            res.status(500).json({msg: "Ha ocurrido un error..."});
         }
 
         if (categoria) {
