@@ -4,9 +4,15 @@ const Categoria = require('../models/categoria');
  * Retorna una lista de Categorias en base a los parámetros de búsqueda.
 */
 const getCategorias = (req, res) => {
-	
-	Categoria.find(req.query)
-	
+
+    const limit = req.query.limit ? req.query.limit : 10;
+    const offset = req.query.offset ? req.query.offset : 0;
+    delete req.query.offset;
+    delete req.query.limit;
+
+    Categoria.find(req.query)
+    .limit(Number.parseInt(limit))
+    .skip(Number.parseInt(offset))
     .then((categorias) => {
         res.status(200).json(categorias);
     })

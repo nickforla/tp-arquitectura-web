@@ -20,9 +20,9 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
     | ------ | ---- | ----------- | -- |
     |_limit_|int|Cantidad de resultados| No |
     |_offset_|int|Comenzando desde| No |
-    |_query_|string|Filtro de búsqueda por nombre del usuario.| No |
-    | _precio-desde_|float|Precio mínimo del producto.| No |
-    | _precio-desde_|float|Precio máximo del producto.| No |
+    |_nombre_|string|Filtro de búsqueda por nombre del producto.| No |
+    | _precio_desde_|float|Precio mínimo del producto.| No |
+    | _precio_hasta_|float|Precio máximo del producto.| No |
 
     - **Codigos de Respuesta**:
 
@@ -217,7 +217,7 @@ MongoDB ha sido la tecnología NoSQL seleccionada para almacenar estos recursos.
     | ------ | ---- | ----------- | -- |
     |_limit_|int|Cantidad de resultados|No|
     |_offset_|int|Comenzando desde| No |
-    |_query_|string|Filtro de búsqueda por nombre de la categoría.| No |
+    |_nombre_|string|Filtro de búsqueda por nombre de la categoría.| No |
 
     - **Codigos de Respuesta**:
 
