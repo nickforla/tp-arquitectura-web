@@ -5,7 +5,7 @@ const Categoria = require('../models/categoria');
  * Retorna una lista de productos en base a los parámetros de búsqueda.
 */
 const getProductos = (req, res) => {
-    Producto.find()
+    Producto.find(req.query)
     .then((productos) => {
         res.status(200).json(productos);
     })

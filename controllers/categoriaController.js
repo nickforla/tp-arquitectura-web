@@ -4,7 +4,9 @@ const Categoria = require('../models/categoria');
  * Retorna una lista de Categorias en base a los parámetros de búsqueda.
 */
 const getCategorias = (req, res) => {
-    Categoria.find()
+	
+	Categoria.find(req.query)
+	
     .then((categorias) => {
         res.status(200).json(categorias);
     })
@@ -13,7 +15,9 @@ const getCategorias = (req, res) => {
             msg: err
         })
     });
-}
+	
+	
+	}
 
 /**
  * Busca una Categoria por id y lo retorna si es hallado, caso contrario retorna un 404.
