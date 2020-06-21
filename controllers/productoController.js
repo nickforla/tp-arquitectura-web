@@ -5,31 +5,45 @@ const Categoria = require('../models/categoria');
  * Retorna una lista de productos en base a los parámetros de búsqueda.
 */
 const getProductos = (req, res) => {
-    console.log(req.query);
-    
+    //console.log(req.query);
+
     const limit = req.query.limit ? req.query.limit : 10;
     const offset = req.query.offset ? req.query.offset : 0;
     delete req.query.offset;
     delete req.query.limit;
     
     let query = {};
-
-    if(req.query.nombre) {
+	
+	if(req.query.codigoProducto) {
+        query.codigoProducto = req.query.codigoProducto;
+    }
+	
+	if(req.query.nombre) {
         query.nombre = req.query.nombre;
     }
-
+	
+	if(req.query.marca) {
+        query.marca = req.query.marca;
+    }
+	
+	if(req.query.stock) {
+		query.stock = {$gte: Number.parseFloat(req.query.stock)};
+	}
+	
     if(req.query.precio_desde) {
+		
         if(req.query.precio_hasta) {
-            query.$or = [{ precio: {$gte: Number.parseFloat(req.query.precio_desde)}},
-                         { precio: {$lte: Number.parseFloat(req.query.precio_hasta)}}];
+		query.precio = { $gte: Number.parseFloat(req.query.precio_desde), $lte: Number.parseFloat(req.query.precio_hasta) } ;
+		
         } else {
-            query.precio = {$gte: Number.parseFloat(req.query.precio_desde)}
-        }
+            query.precio = {$gte: Number.parseFloat(req.query.precio_desde)};
+		}
     } else if(req.query.precio_hasta) {
         query.precio = {$lte: Number.parseFloat(req.query.precio_hasta)};
-    }
-    console.log(query);
-    
+    } 
+	
+	console.log(query);  
+   
     Producto.find(query)
     .limit(Number.parseInt(limit))
     .skip(Number.parseInt(offset))
@@ -41,6 +55,7 @@ const getProductos = (req, res) => {
             msg: err
         })
     });
+		
 }
 
 /**
@@ -166,11 +181,12 @@ const getProductosByCategoriaId = (req, res) => {
     });
 }
 
+
 module.exports = {
     getProductos,
     getProductoById,
     crearProducto,
     modificarProducto,
     eliminarProductoById,
-    getProductosByCategoriaId
+	getProductosByCategoriaId
 }
