@@ -13,27 +13,28 @@ const getProductos = (req, res) => {
     delete req.query.limit;
     
     let query = {};
-	
+
+	//codigoProducto
 	if(req.query.codigoProducto) {
         query.codigoProducto = req.query.codigoProducto;
     }
-	
+	//nombre
 	if(req.query.nombre) {
         query.nombre = req.query.nombre;
     }
-	
+	//marca
 	if(req.query.marca) {
         query.marca = req.query.marca;
     }
-	
+	//stock mayor a
 	if(req.query.stock) {
 		query.stock = {$gte: Number.parseFloat(req.query.stock)};
 	}
-	
+	//precio (desde, hasta o between)
     if(req.query.precio_desde) {
 		
         if(req.query.precio_hasta) {
-		query.precio = { $gte: Number.parseFloat(req.query.precio_desde), $lte: Number.parseFloat(req.query.precio_hasta) } ;
+			query.precio = { $gte: Number.parseFloat(req.query.precio_desde), $lte: Number.parseFloat(req.query.precio_hasta) } ;
 		
         } else {
             query.precio = {$gte: Number.parseFloat(req.query.precio_desde)};
@@ -41,8 +42,16 @@ const getProductos = (req, res) => {
     } else if(req.query.precio_hasta) {
         query.precio = {$lte: Number.parseFloat(req.query.precio_hasta)};
     } 
+	//categoria
+	if(req.query.categoria_id) {
+		query = { 'categoria.id' : req.query.categoria_id } ; 
+		
+    } else if(req.query.categoria_nombre) { 
+        query = { 'categoria.nombre' : req.query.categoria_nombre } ; 
+    } 
 	
-	console.log(query);  
+	console.log(req.query);  
+    console.log(query);
    
     Producto.find(query)
     .limit(Number.parseInt(limit))
