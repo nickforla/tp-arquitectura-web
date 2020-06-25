@@ -1,54 +1,57 @@
 const Producto = require('../models/producto');
 const Categoria = require('../models/categoria');
 
+const buildProductosQuery = (requestQuery) => {
+    let query = {};
+
+	//codigoProducto
+	if(requestQuery.codigoProducto) {
+        query.codigoProducto = {$regex: requestQuery.codigoProducto, $options: 'i' };
+        // query.codigoProducto = requestQuery.codigoProducto;
+    }
+	//nombre
+	if(requestQuery.nombre) {
+        query.nombre = {$regex: requestQuery.nombre, $options: 'i' };
+        // query.nombre = requestQuery.nombre;
+    }
+	//marca
+	if(requestQuery.marca) {
+        query.marca = {$regex: requestQuery.marca, $options: 'i' };
+        // query.marca = requestQuery.marca;
+    }
+	//stock mayor a
+	if(requestQuery.stock_desde) {
+		query.stock = {$gte: Number.parseFloat(requestQuery.stock_desde)};
+	}
+	//precio (desde, hasta o between)
+    if(requestQuery.precio_desde) {
+        if(requestQuery.precio_hasta) {
+			query.precio = { $gte: Number.parseFloat(requestQuery.precio_desde), $lte: Number.parseFloat(requestQuery.precio_hasta) } ;	
+        } else {
+            query.precio = {$gte: Number.parseFloat(requestQuery.precio_desde)};
+		}
+    } else if(requestQuery.precio_hasta) {
+        query.precio = {$lte: Number.parseFloat(requestQuery.precio_hasta)};
+    } 
+	//categoria
+	if(requestQuery.categoria_id) {
+		query['categoria.id'] = requestQuery.categoria_id; 
+    } else if(requestQuery.categoria_nombre) { 
+        query['categoria.nombre']= requestQuery.categoria_nombre; 
+    }
+
+    return query;
+}
+
 /**
  * Retorna una lista de productos en base a los parámetros de búsqueda.
 */
 const getProductos = (req, res) => {
-    //console.log(req.query);
 
     const limit = req.query.limit ? req.query.limit : 10;
     const offset = req.query.offset ? req.query.offset : 0;
-    delete req.query.offset;
-    delete req.query.limit;
     
-    let query = {};
-
-	//codigoProducto
-	if(req.query.codigoProducto) {
-        query.codigoProducto = req.query.codigoProducto;
-    }
-	//nombre
-	if(req.query.nombre) {
-        query.nombre = req.query.nombre;
-    }
-	//marca
-	if(req.query.marca) {
-        query.marca = req.query.marca;
-    }
-	//stock mayor a
-	if(req.query.stock) {
-		query.stock = {$gte: Number.parseFloat(req.query.stock)};
-	}
-	//precio (desde, hasta o between)
-    if(req.query.precio_desde) {
-		
-        if(req.query.precio_hasta) {
-			query.precio = { $gte: Number.parseFloat(req.query.precio_desde), $lte: Number.parseFloat(req.query.precio_hasta) } ;
-		
-        } else {
-            query.precio = {$gte: Number.parseFloat(req.query.precio_desde)};
-		}
-    } else if(req.query.precio_hasta) {
-        query.precio = {$lte: Number.parseFloat(req.query.precio_hasta)};
-    } 
-	//categoria
-	if(req.query.categoria_id) {
-		query = { 'categoria.id' : req.query.categoria_id } ; 
-		
-    } else if(req.query.categoria_nombre) { 
-        query = { 'categoria.nombre' : req.query.categoria_nombre } ; 
-    } 
+    let query = buildProductosQuery(req.query);
 	
 	console.log(req.query);  
     console.log(query);
@@ -64,7 +67,6 @@ const getProductos = (req, res) => {
             msg: err
         })
     });
-		
 }
 
 /**
