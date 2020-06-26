@@ -10,7 +10,6 @@ function productoValidator(req, res, next) {
     req.check('marca', 'Marca no puede estar vacío').notEmpty();
     //Validación precio
     req.check('precio', 'Precio no puede estar vacío').notEmpty();
-    
 
     const errors = req.validationErrors();
     if(errors) {

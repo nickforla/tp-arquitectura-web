@@ -7,10 +7,14 @@ const getCategorias = (req, res) => {
 
     const limit = req.query.limit ? req.query.limit : 10;
     const offset = req.query.offset ? req.query.offset : 0;
-    delete req.query.offset;
-    delete req.query.limit;
 
-    Categoria.find(req.query)
+    let query = {};
+
+    if(req.query.nombre) {
+        query.nombre = {$regex: req.query.nombre, $options: 'i' };
+    }
+
+    Categoria.find(query)
     .limit(Number.parseInt(limit))
     .skip(Number.parseInt(offset))
     .then((categorias) => {
@@ -30,10 +34,8 @@ const getCategorias = (req, res) => {
 */
 const getCategoriaById = (req, res) => {
 
-    Categoria.findById(req.params.id, (error, categoria) => {
-        if (error) {
-            res.status(500).json({msg: "Ha ocurrido un error..."});
-        }
+    Categoria.findById(req.params.id)
+    .then(categoria => {
 
         if (categoria) {
             res.status(200).json(categoria);
@@ -42,7 +44,13 @@ const getCategoriaById = (req, res) => {
                 msg: `La Categoria con el id indicado(${req.params.id}) no fue encontrada`
             });
         }
+
     })
+    .catch((err) => {
+        res.status(500).json({
+            msg: err
+        })
+    });
 }
 
 /**
@@ -54,11 +62,9 @@ const crearCategoria = (req, res) => {
 
     nuevaCategoria.save()
     .then(resultado => {
-        console.log(resultado);
         res.status(201).json(resultado);
     })
     .catch(error => {
-        console.log(error);
         res.status(500).json({
             msg: error
         });
@@ -75,7 +81,6 @@ const modificarCategoria = (req, res) => {
 
     Categoria.updateOne({_id: CategoriaAModificar._id}, CategoriaAModificar)
     .then(resultado => {
-        
         if (resultado.nModified === 0){
             res.status(404).json({
                 msg: `La Categoria con el id indicado(${CategoriaAModificar._id}) no fue encontrada.`
@@ -87,7 +92,6 @@ const modificarCategoria = (req, res) => {
         }
     })
     .catch(error => {
-        console.log(error);
         res.status(500).json({
             msg: error
         });
@@ -98,8 +102,6 @@ const modificarCategoria = (req, res) => {
  * Elimina una Categoria por id.
 */
 const eliminarCategoriaById = (req, res) => {
-
-    // console.log(req);
 
     Categoria.deleteOne({_id: req.params.id})
     .then(result => {

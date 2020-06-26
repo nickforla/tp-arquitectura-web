@@ -10,6 +10,6 @@ categoriasRouter.post('/', categoriaValidator, categoriasController.crearCategor
 categoriasRouter.put('/', categoriaValidator, categoriasController.modificarCategoria);
 categoriasRouter.get('/:id', categoriasController.getCategoriaById);
 categoriasRouter.delete('/:id', categoriasController.eliminarCategoriaById);
-categoriasRouter.get('/:id/productos',productosController.getProductosByCategoriaId);
+categoriasRouter.get('/:id/productos', productosController.getProductosByCategoriaId);
 
 module.exports = categoriasRouter;

@@ -2,42 +2,44 @@ const Producto = require('../models/producto');
 const Categoria = require('../models/categoria');
 
 const buildProductosQuery = (requestQuery) => {
+
     let query = {};
 
 	//codigoProducto
 	if(requestQuery.codigoProducto) {
         query.codigoProducto = {$regex: requestQuery.codigoProducto, $options: 'i' };
-        // query.codigoProducto = requestQuery.codigoProducto;
     }
 	//nombre
 	if(requestQuery.nombre) {
         query.nombre = {$regex: requestQuery.nombre, $options: 'i' };
-        // query.nombre = requestQuery.nombre;
     }
 	//marca
 	if(requestQuery.marca) {
         query.marca = {$regex: requestQuery.marca, $options: 'i' };
-        // query.marca = requestQuery.marca;
     }
-	//stock mayor a
-	if(requestQuery.stock_desde) {
-		query.stock = {$gte: Number.parseFloat(requestQuery.stock_desde)};
-	}
-	//precio (desde, hasta o between)
-    if(requestQuery.precio_desde) {
-        if(requestQuery.precio_hasta) {
-			query.precio = { $gte: Number.parseFloat(requestQuery.precio_desde), $lte: Number.parseFloat(requestQuery.precio_hasta) } ;	
+	//Stock (desde, hasta o between)
+    if(requestQuery.stockDesde) {
+        if(requestQuery.stockHasta) {
+			query.stock = { $gte: Number.parseFloat(requestQuery.stockDesde), $lte: Number.parseFloat(requestQuery.stockHasta) } ;	
         } else {
-            query.precio = {$gte: Number.parseFloat(requestQuery.precio_desde)};
+            query.stock = {$gte: Number.parseFloat(requestQuery.stockDesde)};
 		}
-    } else if(requestQuery.precio_hasta) {
-        query.precio = {$lte: Number.parseFloat(requestQuery.precio_hasta)};
+    } else if(requestQuery.stockHasta) {
+        query.stock = {$lte: Number.parseFloat(requestQuery.stockHasta)};
+    }
+	//precio (desde, hasta o between)
+    if(requestQuery.precioDesde) {
+        if(requestQuery.precioHasta) {
+			query.precio = { $gte: Number.parseFloat(requestQuery.precioDesde), $lte: Number.parseFloat(requestQuery.precioHasta) } ;	
+        } else {
+            query.precio = {$gte: Number.parseFloat(requestQuery.precioDesde)};
+		}
+    } else if(requestQuery.precioHasta) {
+        query.precio = {$lte: Number.parseFloat(requestQuery.precioHasta)};
     } 
-	//categoria
-	if(requestQuery.categoria_id) {
-		query['categoria.id'] = requestQuery.categoria_id; 
-    } else if(requestQuery.categoria_nombre) { 
-        query['categoria.nombre']= requestQuery.categoria_nombre; 
+	//Nombre categoria
+	if(requestQuery.categoriaNombre) { 
+        query['categoria.nombre']= {$regex: requestQuery.categoriaNombre, $options: 'i' };
     }
 
     return query;
@@ -52,9 +54,6 @@ const getProductos = (req, res) => {
     const offset = req.query.offset ? req.query.offset : 0;
     
     let query = buildProductosQuery(req.query);
-	
-	console.log(req.query);  
-    console.log(query);
    
     Producto.find(query)
     .limit(Number.parseInt(limit))
@@ -73,13 +72,9 @@ const getProductos = (req, res) => {
  * Busca un producto por id y lo retorna si es hallado, caso contrario retorna un 404.
 */
 const getProductoById = (req, res) => {
-    console.log(req.params);
 
-    Producto.findById(req.params.id, (error, producto) => {
-        if (error) {
-            res.status(500).json({error});
-        }
-
+    Producto.findById(req.params.id)
+    .then((producto) => {
         if (producto) {
             res.status(200).json(producto);
         } else {
@@ -88,6 +83,12 @@ const getProductoById = (req, res) => {
             });
         }
     })
+    .catch((err) => {
+        res.status(500).json({
+            msg: err
+        });
+    });
+
 }
 
 /**
@@ -99,12 +100,9 @@ const crearProducto = (req, res) => {
 
     nuevoProducto.save()
     .then(resultado => {
-        delete resultado.__v;
-
         res.status(201).json(resultado);
     })
     .catch(error => {
-        console.log(error);
         res.status(500).json({
             msg: error
         });
@@ -121,22 +119,17 @@ const modificarProducto = (req, res) => {
 
     Producto.updateOne({_id: productoAModificar._id}, productoAModificar)
     .then(resultado => {
-        
         if (resultado.nModified === 0){
             res.status(404).json({
                 msg: `El producto con el id indicado(${productoAModificar._id}) no fue encontrado.`
             });
         } else {
-            console.log(resultado);
-            delete resultado.__v;
-
             res.status(200).json({
                 msg: 'Producto modificado exitosamente!'
             });
         }
     })
     .catch(error => {
-        console.log(error);
         res.status(500).json({
             msg: error
         });
@@ -187,8 +180,7 @@ const getProductosByCategoriaId = (req, res) => {
             res.status(404).json({msg: 'La categoría indicada no fue hallada...'});
         }
     }).catch(err => {
-        console.log(err);
-        res.status(500).json({msg: 'Ha ocurrido un error'});
+        res.status(500).json({msg: 'Ha ocurrido un error...'});
     });
 }
 
