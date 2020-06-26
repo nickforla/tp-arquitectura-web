@@ -1,4 +1,5 @@
 const Categoria = require('../models/categoria');
+const { buildCategoriasQuery } = require('../services/queryService');
 
 /**
  * Retorna una lista de Categorias en base a los parámetros de búsqueda.
@@ -8,11 +9,7 @@ const getCategorias = (req, res) => {
     const limit = req.query.limit ? req.query.limit : 10;
     const offset = req.query.offset ? req.query.offset : 0;
 
-    let query = {};
-
-    if(req.query.nombre) {
-        query.nombre = {$regex: req.query.nombre, $options: 'i' };
-    }
+    let query = buildCategoriasQuery(req.query);
 
     Categoria.find(query)
     .limit(Number.parseInt(limit))
